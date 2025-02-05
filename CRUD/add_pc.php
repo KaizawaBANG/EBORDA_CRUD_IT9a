@@ -2,7 +2,7 @@
 session_start();
 include "db.php";
 
-// Redirect if not logged in
+
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
@@ -14,19 +14,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $model = $_POST["model"];
     $price = $_POST["price"];
 
-    // Handle file upload
+   
     if (!empty($_FILES["pc_picture"]["name"])) {
-        $upload_dir = "uploads/";  // Ensure this folder exists
-        $file_name = uniqid() . "_" . basename($_FILES["pc_picture"]["name"]);  // Unique filename
+        $upload_dir = "uploads/"; 
+        $file_name = uniqid() . "_" . basename($_FILES["pc_picture"]["name"]);  
         $target_file = $upload_dir . $file_name;
         $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         $allowed_types = ["jpg", "jpeg", "png", "gif"];
 
-        // Validate file type
+        
         if (!in_array($file_type, $allowed_types)) {
             $error = "Only JPG, JPEG, PNG, and GIF files are allowed.";
         } elseif (move_uploaded_file($_FILES["pc_picture"]["tmp_name"], $target_file)) {
-            // Save to database
+           
             $stmt = $conn->prepare("INSERT INTO pcs (brand, model, price, image) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssds", $brand, $model, $price, $file_name);
 
