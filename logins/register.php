@@ -2,7 +2,7 @@
 session_start();
 include "db.php";
 
-$message = ""; // Initialize message variable
+$message = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <p class="text-center mt-3">Already have an account? <a href="login.php">Login</a></p>
 
-        <!-- ✅ Success/Error message at the BOTTOM -->
         <div class="mt-3">
             <?= $message; ?>
         </div>
