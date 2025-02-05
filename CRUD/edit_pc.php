@@ -10,17 +10,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $brand = $_POST["brand"];
     $model = $_POST["model"];
     $price = $_POST["price"];
-    $image_name = $pc["image"]; // Keep the existing image by default
+    $image_name = $pc["image"]; 
 
-    // Check if a new image is uploaded
+   
     if (!empty($_FILES["image"]["name"])) {
         $target_dir = "uploads/";
         $image_name = uniqid() . "_" . basename($_FILES["image"]["name"]);
         $target_file = $target_dir . $image_name;
 
-        // Move the uploaded file
+       
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            // Delete old image if a new one is uploaded
+           
             if (!empty($pc["image"]) && file_exists("uploads/" . $pc["image"])) {
                 unlink("uploads/" . $pc["image"]);
             }
